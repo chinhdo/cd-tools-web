@@ -1,3 +1,4 @@
+declare var require: any;
 import { Component, OnInit } from '@angular/core';
 var shortUuid = require('short-uuid');
 
