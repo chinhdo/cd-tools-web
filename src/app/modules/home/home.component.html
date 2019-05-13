@@ -1,0 +1,26 @@
+<div class="tool">
+  <button type="button" class="btn btn-primary" (click)="generateGuid()" title="Generate a new GUID/UUID, and the shorted version.">Generate
+    GUID</button>
+  <div id="moreOptionsButton">
+    <div class="dropdown">
+      <button type="button" class="btn btn-primary" (click)="toggleDropdown()">
+        <i class="fas fa-ellipsis-v fa-lg dropbtn" title="More options..."></i>
+      </button>
+      <div class="dropdown-content" *ngIf="dropdownVisible">
+        <input type="checkbox" id="shortUuid" value="short">
+        <label for="shortUuid">Short</label>
+        <input type="checkbox" id="both" value="both">
+        <label for="both">Both</label>
+        <i class="far fa-trash-alt" (click)="clear()" title="Clear"></i>
+      </div>
+    </div>
+  </div>
+  <div [ngClass]="copiedClass">Copied</div>
+
+  <div id="guids">
+    <ul>
+      <li *ngFor="let uuid of guids"><span (click)="copy(uuid)">{{uuid}}</span>
+        <span (click)="copy(getShort(uuid))"> ({{getShort(uuid)}})</span></li>
+    </ul>
+  </div>
+</div>
