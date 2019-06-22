@@ -1,5 +1,6 @@
-declare var require: any;
-import { Component, OnInit } from '@angular/core';
+// declare var require: any;
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ElementRef, Renderer2 } from '@angular/core';
 var shortUuid = require('short-uuid');
 
 @Component({
@@ -8,26 +9,56 @@ var shortUuid = require('short-uuid');
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('elGuids') elGuids:ElementRef;
 
-  constructor() { }
+  constructor(private rd: Renderer2) { }
 
   guids: string[] = [];
   translator: any;
   copiedClass = 'invisible';
-  dropdownVisible = true;
+  slideDownVisible = false;
+  numUuids = 1; // How many Uuids to generate
+  generateShort = true;
 
   ngOnInit() {
     this.translator = shortUuid();
-    this.generateGuid();
+    this.generate();
   }
 
   clear() {
     this.guids = [];
-    this.generateGuid();
+    this.generate();
+  }
+
+  copy() {
+    const text = this.elGuids.nativeElement.innerText;
+    this.copyToClipboard(text);
+  }
+
+  generate() {
+    for (let i = 0; i < this.numUuids; i++) {
+      this.guids.push(this.translator.uuid());
+    }
+  }
+
+  toggleDropdown() {
+    this.slideDownVisible = !this.slideDownVisible;
+  }
+
+  getShort(uuid: string) {
+    return this.translator.fromUUID(uuid);
+  }
+
+  validate() {
+    // Use validation
+    if (this.numUuids > 1024) {
+      this.numUuids = 1024;
+    }
   }
 
   /**Copy to the clipboard */
-  copy(str: string) {
+  // TODO: Move this to helper
+  private copyToClipboard(str: string) {
     const el = document.createElement('textarea');  // Create a <textarea> element
     el.value = str;                                 // Set its value to the string that you want copied
     el.setAttribute('readonly', '');                // Make it readonly to be tamper-proof
@@ -49,17 +80,5 @@ export class HomeComponent implements OnInit {
     this.copiedClass = 'fade-out';
     setTimeout(() => { this.copiedClass = 'invisible' }, 500);
 
-  }
-
-  generateGuid() {
-    this.guids.push(this.translator.uuid());
-  }
-
-  getShort(uuid: string) {
-    return this.translator.fromUUID(uuid);
-  }
-
-  toggleDropdown() {
-    this.dropdownVisible = ! this.dropdownVisible;
   }
 }

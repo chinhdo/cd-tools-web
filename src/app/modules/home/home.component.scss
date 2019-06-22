@@ -1,20 +1,52 @@
+i {cursor: pointer}
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    border: 1px solid red;
-    padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+.tool {
+  border: 1px solid #DCDCDC;
+  padding: 1em;
+}
+
+#more-button {
+  float: right;
+  padding-top: 15px
+}
+
+.slide-down {
+  color: white;
+  background-color: gray;
+  margin-top: 0.5rem;
+  padding: 0.75rem 0.25rem .5rem 0.75rem;
+  font-size: 0.9rem;
+
+  * {margin-right: 0.5rem; margin-bottom: 0.25rem;}
+
+  input[type="checkbox"] {
+    margin-right: 0.2rem
   }
 
-  .dropdown-content * {
-      margin-right: 0.5em
+  input[type="number"] {
+    width: 3rem
   }
+}
+
+#guids {
+  font-family: monospace;
+  font-size: 1em;
+  margin-top: 0.5rem
+}
+
+ul {
+    list-style: none;
+    padding-left: 0
+}
+
+.fade-out {
+  font-size: 0.75rem;
+  padding-left: 0.5rem;
+  -webkit-animation: seconds 2.0s forwards;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-delay: 2s;
+  animation: seconds 2.0s forwards;
+  animation-iteration-count: 1;
+  animation-delay: 2s;
+  position: relative;      
+}

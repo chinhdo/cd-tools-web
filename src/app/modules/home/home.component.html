@@ -1,26 +1,27 @@
 <div class="tool">
-  <button type="button" class="btn btn-primary" (click)="generateGuid()" title="Generate a new GUID/UUID, and the shorted version.">Generate
-    GUID</button>
-  <div id="moreOptionsButton">
-    <div class="dropdown">
-      <button type="button" class="btn btn-primary" (click)="toggleDropdown()">
-        <i class="fas fa-ellipsis-v fa-lg dropbtn" title="More options..."></i>
-      </button>
-      <div class="dropdown-content" *ngIf="dropdownVisible">
-        <input type="checkbox" id="shortUuid" value="short">
-        <label for="shortUuid">Short</label>
-        <input type="checkbox" id="both" value="both">
-        <label for="both">Both</label>
-        <i class="far fa-trash-alt" (click)="clear()" title="Clear"></i>
-      </div>
+    <button type="button" class="btn btn-primary" (click)="generate()"
+      title="Generate a new GUID/UUID, and the shorted version.">Generate
+      GUID</button>    
+    <div id="more-button">
+      <i *ngIf="!slideDownVisible" class="fas fa-chevron-down fa-lg" title="More options..." (click)="toggleDropdown()"></i>
+      <i *ngIf="slideDownVisible" class="fas fa-chevron-up fa-lg" title="More options..." (click)="toggleDropdown()"></i>
     </div>
+  <div class="slide-down" *ngIf="slideDownVisible">
+    <label for="numUuids">How many:</label>
+    <input id="numUuids" type="number" value="1" [(ngModel)]="numUuids" (change)="validate()" title="How many UUIDs to generate">
+    <input type="checkbox" id="generateShort" [(ngModel)]="generateShort">
+    <label for="generateShort">Short</label>
+    <i class="far fa-trash-alt" (click)="clear()" title="Clear"></i>
   </div>
-  <div [ngClass]="copiedClass">Copied</div>
 
-  <div id="guids">
+  <div id="guids" #elGuids>
     <ul>
-      <li *ngFor="let uuid of guids"><span (click)="copy(uuid)">{{uuid}}</span>
-        <span (click)="copy(getShort(uuid))"> ({{getShort(uuid)}})</span></li>
+      <li *ngFor="let uuid of guids">
+        <span (click)="copy(uuid)">{{uuid}}</span>
+        <span *ngIf="generateShort" (click)="copy(getShort(uuid))"> ({{getShort(uuid)}})</span>
+      </li>
     </ul>
+    <i class="far fa-copy" (click)="copy()"></i>
+    <span [ngClass]="copiedClass">Copied</span>
   </div>
 </div>
