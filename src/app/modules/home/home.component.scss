@@ -7,7 +7,7 @@ i {cursor: pointer}
 
 #more-button {
   float: right;
-  padding-top: 15px
+  padding-top: 20px
 }
 
 .slide-down {
@@ -31,7 +31,8 @@ i {cursor: pointer}
 #guids {
   font-family: monospace;
   font-size: 1em;
-  margin-top: 0.5rem
+  margin-top: 0.5rem;
+  i {padding-right: 0.5rem}
 }
 
 ul {

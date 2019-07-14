@@ -10,8 +10,7 @@
     <label for="numUuids">How many:</label>
     <input id="numUuids" type="number" value="1" [(ngModel)]="numUuids" (change)="validate()" title="How many UUIDs to generate">
     <input type="checkbox" id="generateShort" [(ngModel)]="generateShort">
-    <label for="generateShort">Short</label>
-    <i class="far fa-trash-alt" (click)="clear()" title="Clear"></i>
+    <label for="generateShort">Short</label>    
   </div>
 
   <div id="guids" #elGuids>
@@ -22,6 +21,7 @@
       </li>
     </ul>
     <i class="far fa-copy" (click)="copy()"></i>
+    <i class="far fa-trash-alt" (click)="clear()" title="Clear"></i>
     <span [ngClass]="copiedClass">Copied</span>
   </div>
 </div>
