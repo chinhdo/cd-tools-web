@@ -1,7 +1,7 @@
 // declare var require: any;
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ElementRef, Renderer2 } from '@angular/core';
-var shortUuid = require('short-uuid');
+let shortUuid = require('short-uuid'); // TODO import
 
 @Component({
   selector: 'app-home',
@@ -9,7 +9,7 @@ var shortUuid = require('short-uuid');
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('elGuids') elGuids:ElementRef;
+  @ViewChild('elGuids') elGuids: ElementRef;
 
   constructor(private rd: Renderer2) { }
 
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   slideDownVisible = false;
   numUuids = 1; // How many Uuids to generate
   generateShort = true;
+  theJson = '';
 
   ngOnInit() {
     this.translator = shortUuid();
@@ -41,12 +42,41 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  toggleDropdown() {
-    this.slideDownVisible = !this.slideDownVisible;
-  }
-
   getShort(uuid: string) {
     return this.translator.fromUUID(uuid);
+  }
+
+  scratch() {
+    const data = JSON.parse(this.theJson);
+    data.claims.forEach((x) => {
+      if (!x.billingProvider) {
+        console.log('FOUND!');
+      }
+    });
+  }
+
+  addBillingProvider() {
+    const data = JSON.parse(this.theJson);
+    let idx = 101;
+    data.claims.forEach((c) => {
+      c['billingProvider'] = {
+        professionalNm: c.servicingProvider ? c.servicingProvider.professionalNm : 'NA',
+        organizationNm: c.servicingProvider ? c.servicingProvider.organizationNm : 'NA'
+      };
+      let p = (<any> c).billingProvider;
+      p.taxId = idx;
+      if (!p.organizationNm) {
+        p.organizationNm = p.professionalNm;
+      }
+
+      idx ++;
+    });
+
+    this.theJson = JSON.stringify(data, null, 2);
+  }
+
+  toggleDropdown() {
+    this.slideDownVisible = !this.slideDownVisible;
   }
 
   validate() {
@@ -79,6 +109,43 @@ export class HomeComponent implements OnInit {
 
     this.copiedClass = 'fade-out';
     setTimeout(() => { this.copiedClass = 'invisible' }, 500);
+  }
 
+  // -----
+  // SEARCH CF
+  // TODO: move to new component
+
+  searchTerm = '"splunk faqs"';
+  searchConfluence() {
+    const spaces = [
+      'REIMAGINED', 'AR', 'ARVM', 'PAR', '~AB75705', 'AKCP', 'MbrPortalJavaKb', 'PortalJavaKb', 'DOps', 'CKT'
+    ];
+
+
+    if (this.searchTerm) {
+      const escaped = this.searchTerm.replace(/\"/g, '\\"');
+      let url = 'https://confluence.anthem.com/dosearchsite.action?cql=siteSearch+~+%22';
+      url += encodeURI(escaped);
+      url += '%22';
+      url += '+and+space+in+(';
+
+      let spacesUrl = '';
+      for (let i = 0; i < spaces.length; i++) {
+        const space = spaces[i];
+        spacesUrl += `"${space}"`;
+        if (i < spaces.length - 1) {
+          spacesUrl += ',';
+        }
+      }
+
+      url += escape(spacesUrl);
+
+      console.log(spacesUrl);
+      // tslint:disable-next-line:max-line-length
+      // url += '%22REIMAGINED%22%2C%22AR%22%2C%22ARVM%22%2C%22PAR%22%2C%22~AB75705%22%2C%22AKCP%22%2C%22MbrPortalJavaKb%22%2C%22PortalJavaKb%22%2C%22DOps%22%2C%22CKT%22)';
+      url += ')&queryString=' + encodeURI(this.searchTerm);
+
+      window.open(url, '_blank');
+    }
   }
 }

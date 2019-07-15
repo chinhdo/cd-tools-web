@@ -3,6 +3,10 @@ i {cursor: pointer}
 .tool {
   border: 1px solid #DCDCDC;
   padding: 1em;
+  margin-bottom: 1.5rem;
+  input {
+    margin-right: 1rem;
+  }
 }
 
 #more-button {
@@ -50,4 +54,10 @@ ul {
   animation-iteration-count: 1;
   animation-delay: 2s;
   position: relative;      
+}
+
+#search-cf-div {
+  input[type=text] {
+    width: 300px;
+  }
 }
