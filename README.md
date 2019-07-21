@@ -32,3 +32,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # TODOs
 - Enter key to search
+- HTML Encoder
+- URL Encoder
+- XML Encoder
+- Base64 Encoder
+- Short Guid
+- JSON compact formatter
