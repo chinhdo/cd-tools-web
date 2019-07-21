@@ -38,6 +38,12 @@
       title="Scratch">Scratch</button>
       <div>
         <br/>
-        <textarea [(ngModel)]="theJson" style="width: 100%; height: 250px"></textarea>
+        <textarea [(ngModel)]="theJson" style="width: 100%; height: 250px; font-family: monospace; font-size: 1rem"></textarea>
       </div>
+</div>
+
+<div id="scratch-div" class="tool">
+  <h2>Elapsed Time</h2>
+  <button type="button" class="btn btn-primary" (click)="startWatch()">Start</button>&nbsp;
+  <button type="button" class="btn btn-primary" (click)="stopWatch()">Stop</button>
 </div>

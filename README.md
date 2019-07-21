@@ -29,3 +29,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Chinh's Notes
 - https://medium.com/@tiboprea/add-bootstrap-4-with-its-sass-files-in-an-angular-5-project-3c8f7fcc0ac0
+
+# TODOs
+- Enter key to search

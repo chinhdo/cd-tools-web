@@ -1,3 +1,4 @@
+import { DataGenService } from './../../shared/utils/data-gen.service';
 // declare var require: any;
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ElementRef, Renderer2 } from '@angular/core';
@@ -47,12 +48,12 @@ export class HomeComponent implements OnInit {
   }
 
   scratch() {
+    const taxIds = ['205354637', '262647323', '012369526'];
     const data = JSON.parse(this.theJson);
-    data.claims.forEach((x) => {
-      if (!x.billingProvider) {
-        console.log('FOUND!');
-      }
+    data.careTeam.forEach((x) => {
+      x.taxId = DataGenService.rndItem(taxIds);
     });
+    this.theJson = JSON.stringify(data, null, 2);
   }
 
   addBillingProvider() {
@@ -147,5 +148,20 @@ export class HomeComponent implements OnInit {
 
       window.open(url, '_blank');
     }
+  }
+
+  startWatch() {
+    const timers = {m1: new Date()};
+    sessionStorage.setItem('watch1', JSON.stringify(timers));
+  }
+
+  stopWatch() {
+    const m2 = new Date();
+    const timers = JSON.parse(sessionStorage.getItem('watch1'));
+
+    const m1 = Date.parse(timers.m1);
+
+    const diff = m2.getTime() - m1;
+    console.log(diff);
   }
 }
