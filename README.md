@@ -38,3 +38,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - Base64 Encoder
 - Short Guid
 - JSON compact formatter
+- Remember settings using localStorage
