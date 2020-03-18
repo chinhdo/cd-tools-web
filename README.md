@@ -1,6 +1,6 @@
-# Chinh Do's Tools Web
+# NgTemp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
 
 ## Development server
 
@@ -26,16 +26,6 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-
-# Chinh's Notes
-- https://medium.com/@tiboprea/add-bootstrap-4-with-its-sass-files-in-an-angular-5-project-3c8f7fcc0ac0
-
-# TODOs
-- Enter key to search
-- HTML Encoder
-- URL Encoder
-- XML Encoder
-- Base64 Encoder
-- Short Guid
-- JSON compact formatter
-- Remember settings using localStorage
+## TODOs
+* Add Bootstrap
+* Use SVG backgrounds - see Angular CLI generated app for examples

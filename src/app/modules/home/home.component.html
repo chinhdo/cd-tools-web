@@ -15,21 +15,14 @@
   <div id="guids" #elGuids>
     <ul>
       <li *ngFor="let uuid of guids">
-        <span (click)="copy(uuid)">{{uuid}}</span>
-        <span *ngIf="generateShort" (click)="copy(getShort(uuid))"> ({{getShort(uuid)}})</span>
+        <span (click)="copy()">{{uuid}}</span>
+        <span *ngIf="generateShort" (click)="copy()"> ({{getShort(uuid)}})</span>
       </li>
     </ul>
     <i class="far fa-copy" (click)="copy()"></i>
     <i class="far fa-trash-alt" (click)="clear()" title="Clear"></i>
     <span [ngClass]="copiedClass">Copied</span>
   </div>
-</div>
-
-<div id="search-cf-div" class="tool">
-  <h2>Search Confluence</h2>
-  <input type="text" title="Search term" [(ngModel)]="searchTerm">
-  <button type="button" class="btn btn-primary" (click)="searchConfluence()"
-      title="Search Confluence.">Search Confluence</button>
 </div>
 
 <div id="scratch-div" class="tool">
