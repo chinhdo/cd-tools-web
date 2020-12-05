@@ -1,3 +1,5 @@
+This repo/project is abandoned. See https://github.com/chinhdo/programmers-toolbox.
+
 # NgTemp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
